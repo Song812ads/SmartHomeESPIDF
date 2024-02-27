@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Webpage</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="script.js"></script>
+	<style type="text/css">
+		body {
+			font-family: Verdana, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+        .icon {
+            font-size: 36px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .home-icon:before {
+            content: '\1f3e0';
+        }
+		.paragraph {
+			background-color: #F8D7DA;
+			height: 150px;
+			text-align: left;
+			padding: 20px;
+			color: #721C24;
+			font-size: 24px;
+			line-height: 150px;
+		}
+
+		.paragraph:nth-child(2) {
+	background-color: #dde38d;
+	height: 100px;
+	line-height: 100px;
+	position: relative;
+}
+
+.paragraph:nth-child(2) input[type="checkbox"]:first-of-type {
+	position: absolute;
+	top: 50%;
+	right: 300px;
+	transform: translateY(-50%) scale(2); /* add scale transformation */
+}
+
+.paragraph:nth-child(2) input[type="checkbox"]:last-of-type {
+	position: absolute;
+	top: 50%;
+	right: 100px;
+	transform: translateY(-50%) scale(2); /* add scale transformation */
+}
+
+		.paragraph:nth-child(3) {
+			background-color: #D4EDDA;
+    		height: 100px;
+    		line-height: 100px;
+    		display: flex;
+    		align-items: center;
+    		justify-content: space-between;
+    		padding: 0 20px;
+		}
+
+		.paragraph:nth-child(3) output {
+    		display: inline-block;
+    		margin-left: 20px;
+    		font-weight: bold;
+    		color: #28A745;
+    		font-size: 24px;
+    		position: relative;
+    		right: 0;
+		}
+
+		.paragraph:nth-child(3) output::before {
+    		content: "°C";
+    		position: absolute;
+    		right: -20px;
+    		top: 0;
+		}
+
+		.paragraph:nth-child(4) {
+	  		background-color: #dde38d;
+	  		height: 100px;
+	  		line-height: 100px;
+	  		display: flex;
+	  		align-items: center;
+  			justify-content: space-between; /* Add this line */
+  			position: relative;
+  			border-radius: 10px;
+  			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  			text-align: center;
+}
+
+.paragraph:nth-child(4) form input {
+  font-size: 24px;
+  width: 80px;
+}
+
+.paragraph:nth-child(4) #GFG_UP,
+.paragraph:nth-child(4) #GFG_DOWN {
+  font-size: 24px;
+}
+
+		.paragraph:nth-child(5) {
+	  		background-color: #D4EDDA;
+	  		height: 100px;
+	  		line-height: 100px;
+	  		display: flex;
+	  		align-items: center;
+  justify-content: space-between; /* Add this line */
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+
+.paragraph:nth-child(5) form input {
+  font-size: 24px;
+  width: 80px;
+}
+
+.paragraph:nth-child(5) #GFG_UP,
+.paragraph:nth-child(5) #GFG_DOWN {
+  font-size: 24px;
+}
+
+.paragraph:nth-child(5) form input[type="submit"] {
+  font-size: 24px;
+  width: 120px; /* Increase the width of the button */
+}
+
+.paragraph:nth-child(5) input[type="checkbox"] {
+  transform: scale(2); /* Increase the size of the checkbox */
+  margin-right: 20px; /* Add some spacing between the checkbox and label */
+}
+
+</style>
+</head>
+<body>
+	<div class="paragraph">WELCOME HOME<span class="icon home-icon"></span><span class="icon home-icon"></span><span class="icon home-icon"></span></div>
+	<div class="paragraph">Lighting<input type="checkbox" id = "led" onclick = "myfunction1()">
+		<input type="checkbox" id = "led1" onclick = "myfunction2()">
+	</div>
+	<div class="paragraph">
+		Temperature 
+		<span id="t1"></span>
+	</div>
+	<div class="paragraph">
+		Fan
+		<div style="display: flex; align-items: center; justify-content: space-between;">
+			<form>
+				<input id="f1" type="number" min="0" max="3" value="0" onchange="quatfunction()">
+			</form>
+			<div>
+				<p id="GFG_UP" style="font-size: 15px; font-weight: bold;"></p>
+				<p id="GFG_DOWN" style="font-size: 24px; font-weight: bold; color: green;"></p>
+			</div>
+		</div>
+	</div>
+	<div class="paragraph">
+		Air-condition
+		<div style="display: flex; align-items: center; justify-content: space-between;">
+			<div style="display: flex; align-items: center;">
+				<input type="checkbox" id="turnon" onclick="turnon()">
+				<form>
+					<input id="input" type="number" min="16" max="30" value="24" onchange="airc()">
+				</form>
+			</div>
+			<div>
+				<p id="GFG_UP" style="font-size: 15px; font-weight: bold;"></p>
+				<p id="GFG_DOWN" style="font-size: 24px; font-weight: bold; color: green;"></p>
+			</div>
+		</div>
+	</div>
+    <script>
+        var xhttp1 = new XMLHttpRequest();
+        var xhttp2 = new XMLHttpRequest();
+		var xhttp3 = new XMLHttpRequest();
+		var xhttp4 = new XMLHttpRequest();
+		var xhttp5 = new XMLHttpRequest();
+		xhttp1.onreadystatechange = function() {
+			const obj = JSON.parse(this.responseText);
+			var element1 = document.getElementById('t1')
+			element1.innerText = obj.temperature;
+		}
+
+		setInterval(function() {
+			xhttp1.open("GET", "/temp", true);
+			xhttp1.send();
+		  }, 1000);
+
+        function myfunction1()
+        {
+            var checkbox = document.getElementById("led");
+            var state = 0;
+            if(checkbox.checked == true){
+              state = 1;
+            }
+            else{
+              state = 0;
+            }
+              xhttp1.open("POST", "/led", true);
+              xhttp1.send(state);
+          }
+
+		  function myfunction2()
+        {
+            var checkbox = document.getElementById("led1");
+            var state = 0;
+            if(checkbox.checked == true){
+              state = 1;
+            }
+            else{
+              state = 0;
+            }
+              xhttp4.open("POST", "/led1", true);
+              xhttp4.send(state);
+          }
+
+        function quatfunction()
+        {
+            var quat = document.getElementById("f1");
+            xhttp2.open("POST", "/quat", true);
+            xhttp2.send(quat.value);
+        }
+
+	function turnon() {
+		var checkbox = document.getElementById("turnon");
+		var state = 0;
+            if(checkbox.checked == true){
+              state = 1;
+            }
+            else{
+              state = 0;
+            }
+              xhttp3.open("POST", "/maylanh", true);
+              xhttp3.send(state);
+          }
+		
+	function airc(){
+	var temp = document.getElementById("input");
+	xhttp5.open("POST","/tempmaylanh",true);
+	xhttp5.send(temp.value);
+	}
+    </script>
+</body>
+</html>

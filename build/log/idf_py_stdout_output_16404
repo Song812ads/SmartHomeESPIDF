@@ -1,0 +1,25 @@
+[1/11] Performing build step for 'bootloader'
+[1/1] cmd.exe /C "cd /D D:\esp\lthtn\build\bootloader\esp-idf\esptool_py && D:\esp\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe D:/esp/Espressif/frameworks/esp-idf-v5.0.1/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 D:/esp/lthtn/build/bootloader/bootloader.bin"
+Bootloader binary size 0x6710 bytes. 0x8f0 bytes (8%) free.
+[2/9] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/app_http_server.c.obj
+D:/esp/lthtn/main/app_http_server.c: In function 'http_request_handle':
+D:/esp/lthtn/main/app_http_server.c:30:17: warning: assignment discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   30 |     request.uri = req->uri;
+      |                 ^
+D:/esp/lthtn/main/app_http_server.c: In function 'uart_event_task':
+D:/esp/lthtn/main/app_http_server.c:241:12: warning: unused variable 'buffered_size' [-Wunused-variable]
+  241 |     size_t buffered_size;
+      |            ^~~~~~~~~~~~~
+[3/9] Linking C static library esp-idf\main\libmain.a
+[4/9] Generating ld/sections.ld
+[5/9] Generating web.html.S
+[6/9] Building ASM object CMakeFiles/lthtn.elf.dir/web.html.S.obj
+[7/9] Linking CXX executable lthtn.elf
+[8/9] Generating binary image from built executable
+esptool.py v4.5
+Creating esp32 image...
+Merged 25 ELF sections
+Successfully created esp32 image.
+Generated D:/esp/lthtn/build/lthtn.bin
+[9/9] cmd.exe /C "cd /D D:\esp\lthtn\build\esp-idf\esptool_py && D:\esp\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe D:/esp/Espressif/frameworks/esp-idf-v5.0.1/components/partition_table/check_sizes.py --offset 0x8000 partition --type app D:/esp/lthtn/build/partition_table/partition-table.bin D:/esp/lthtn/build/lthtn.bin"
+lthtn.bin binary size 0xc4a90 bytes. Smallest app partition is 0x100000 bytes. 0x3b570 bytes (23%) free.

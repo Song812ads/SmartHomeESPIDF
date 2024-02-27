@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "app_http_server.h": "c",
+        "gpio.h": "c"
+    }
+}
